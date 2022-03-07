@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='mainpage.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class=hcontainer>
+        <h1 class=header>Create a New Exercise Below!</h1>
+    </div>
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+            {% if messages %}                            <!-- check if there are any messages -->
+                {% for message in messages %}            <!-- loop through the messages -->
+                    <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <div class=main>
+        
+        <div class=container>
+            <form class=container action="/exercise/new" method="post">
+                <Label for="location">Exercise Name: <input type="text" name="location" class="form-control" required></Label>
+                <Label for="what_happened">What Happened: <input type="text" name="what_happened" class="form-control" required></Label>
+                <Label for="date">Date:<input type="date" name="date" class="form-control" required></Label>
+                <Label for="number"> Number of Sasquatches:</Label>:<input type="number" name="number" class="form-control" required></Label>
+                <input type="submit" value="Submit Report" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+        
+
+
+        <form class=container action="/dashboard">
+            <input type="submit"class="btn btn-primary" value="Back to All Sightings">
+        </form>
+        <form class=container action="/logout" method="post">
+            <input type="submit" value="Log-out" class="btn btn-primary">
+        </form>
+
+        
+        
+</body>
+</html>

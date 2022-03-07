@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='mainpage.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class=main>
+        <h1>Hello {{session['first_name']}}!</h1>
+        <div class="hcontainer">
+        <form class=container action="/logout" method="post">
+            <input type="submit" class="btn btn-primary" value="Log-out">
+        </form>
+        <form class=container action="/createsighting">
+            <input type="submit" class="btn btn-primary" value="Report Sighting">
+        </form>
+        <form class=container action="/dashboard">
+            <input type="submit"class="btn btn-primary" value="Back to Sightings Page">
+        </form>
+        </div>
+    </div>
+    <div class=container>
+        <table class="table table-striped">
+            <tr>
+                <th>Location:</th>
+                <th>What Happened:</th>
+                <th>Date:</th>
+                <th>Number of Sasquatches:</th>
+                <th>Reported By:</th>
+            </tr>
+            
+            <tr>
+                <td>{{this_sighting.location}}</td>
+                <td>{{this_sighting.what_happened}}</td>
+                <td>{{this_sighting.date}}</td>
+                <td>{{this_sighting.number}}</td>
+                <td>{{this_sighting.created_by}}</td>
+            </tr>
+        </table>
+    </div>
+        
+        
+</body>
+</html>

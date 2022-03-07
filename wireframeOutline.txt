@@ -1,20 +1,28 @@
 [REQUIRED] Name: Alex Schneider 
 [REQUIRED] Project Title: Exercise Dictionary
 [REQUIRED] Project Stack: Python (Flask)
-[REQUIRED] GitHub Repo Link: 
+[REQUIRED] GitHub Repo Link: https://github.com/Schneider-Alex/Exercise_Dictionary
 
-[REQUIRED] Project Description: 
+[REQUIRED] Project Description: A Dictionary of exercises for different body parts,
+ where Users can sign up and log in in order to both create and look up new exercsises, and rate them
 
-[REQUIRED] New Programming Concept(s) I'm Planning to Learn: 
+[REQUIRED] New Programming Concept(s) I'm Planning to Learn: I want to get better with AJAX and Javascript, 
+using some data held in the database to display different images/amounts of stars(for ratings for example)
+
 
 [REQUIRED] Week 1 Features (to show at Review during Week 2)
+User account creation, log in, dynamic home page, displaying main muscle groups, where users can select a main muscle group to focus on,
+transfer to said muscle groups page (displaying all available workouts etc.). All CRUD functionality
 - 
 
 [REQUIRED] Week 2 Features (to show at first office hour/lecture of Week 3)
+Really polished CSS/Boostrap/JS functionality
 - ***Finish CSS work (could be Bootstrap or another framework too instead of CSS)***
 - 
 
 [REQUIRED] Product Backlog (If I have more time after completing my MVP, I'll start to work on...)
+Potentionally adding an API from the web of a LARGER already existing dictionary of workouts. 
+
 - 
 
 
