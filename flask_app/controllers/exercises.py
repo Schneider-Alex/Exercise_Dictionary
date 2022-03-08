@@ -12,15 +12,29 @@ def trasnfer_to_create_exercise_page(mainid):
         flash('must be logged in to view this page!')
         return redirect('/')
 
+# @app.route('/saveexercise/<int:mainid>')
+# def trasnfer_to_create_exercise_page(mainid):
+#     if session:
+#         return render_template('newexercisepage.html',mainid=mainid)
+#     else:
+#         flash('must be logged in to view this page!')
+#         return redirect('/')
+
 
 @app.route('/exercise/<int:mainid>/new',methods=['POST'])
 def new_exercise(mainid):
     mainid=mainid
     check=exercise.Exercise.validate_exercise(request.form)
     if check:
-        exercise.Exercise.create_exercise(request.form)
-        return redirect('/dashboard')
-    return redirect(f'createexercise/{mainid}')
+        exerciseid=exercise.Exercise.create_exercise(request.form)
+        return redirect(f'/exercise/{exerciseid}')
+    return redirect(f'/createexercise/{mainid}')
+
+@app.route("/exercise/<int:exerciseid>/like",methods=['POST'])
+def like_exercise(exerciseid):
+    exercise.Exercise.like_exercise(exerciseid)
+    return redirect (f'/exercise/{exerciseid}')
+
 
 @app.route('/sighting/edit/<int:sightingid>')
 def edit_sighting_page(sightingid):
@@ -37,7 +51,7 @@ def edit_sighting():
 
 @app.route('/exercise/<int:exerciseid>')
 def display_class_detail(exerciseid):
-        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid))
+        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid),likes=exercise.Exercise.get_one_exercises_likes(exerciseid))
 
 @app.route('/sighting/delete/<int:sightingid>')
 def delete_sighting_link(sightingid):

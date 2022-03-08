@@ -32,14 +32,14 @@
                 <th>Created By:</th>
                 <th>Likes</th>
             </tr>
+            {%for exercise in groups_exercises.exercises%}
             <tr>
-                {%for exercise in groups_exercises.exercises%}
                 <td><a href="/exercise/{{exercise.id}}">{{exercise.name}}</a></td>
                 <td>{{exercise.equipment}}</td>
                 <td>{{exercise.created_by}}</td>
-                <td><form><input type=submit value="Like"></input></form></td>
-                {%endfor%}
+                <td></td>
             </tr>
+            {%endfor%}
         </table>
         {%else%}
         <H2>No Exercises have been created yet, Be the first to create a {{groups_exercises.name}} exercise below!</H2>

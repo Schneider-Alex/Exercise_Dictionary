@@ -56,13 +56,37 @@ class Exercise:
         return sightings
         
     @classmethod
-    def get_one_exercise(cls, sightingid):
+    def get_one_exercise(cls, exerciseid):
         data={
-            'id': sightingid
+            'id': exerciseid
         }
-        query = "SELECT * FROM exercises where id = %(id)s;"
+        query = """SELECT * FROM exercises 
+        where id = %(id)s;"""
         results = connectToMySQL('exercise').query_db(query,data)
         return cls(results[0])
+
+        @classmethod
+    def get_one_exercises_comments(cls, exerciseid):
+        data={
+            'id': exerciseid
+        }
+        query = """SELECT * FROM exercises 
+        where id = %(id)s;"""
+        results = connectToMySQL('exercise').query_db(query,data)
+        return cls(results[0])
+
+
+    @classmethod
+    def get_one_exercises_likes(cls, exerciseid):
+        data={
+            'id': exerciseid
+        }
+        query = """SELECT COUNT(*) FROM likes 
+        where exercise_id = %(id)s;"""
+        results = connectToMySQL('exercise').query_db(query,data)
+        if not results:
+            return 0
+        return results
 
 
     @classmethod
@@ -88,7 +112,17 @@ class Exercise:
         query = """INSERT INTO exercises (name, description, primary_muscle, secondary_muscle,equipment,main_group_id,user_id) 
         VALUES (%(name)s, %(description)s, %(primary_muscle)s, %(secondary_muscle)s,%(equipment)s,%(main_group)s,%(user_id)s);"""
         return connectToMySQL('exercise').query_db( query, data )
-    
+
+    @classmethod
+    def like_exercise(cls,exerciseid):
+        data={
+            'user_id' : session['id'],
+            'exercise_id' : exerciseid
+        }
+        query = """INSERT INTO likes (user_id, exercise_id) 
+        VALUES (%(user_id)s,%(exercise_id)s);"""
+        return connectToMySQL('exercise').query_db( query, data )
+
     @classmethod
     def update_sighting(cls,form):
         data={

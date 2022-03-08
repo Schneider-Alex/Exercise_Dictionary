@@ -32,6 +32,7 @@
                 <th>Secondary Muscle:</th>
                 <th>Equipment:</th>
                 <th>Created By:</th>
+                <th>Likes</th>
             </tr>
             
             <tr>
@@ -41,8 +42,17 @@
                 <td>{{this_exercise.secondary_muscle}}</td>
                 <td>{{this_exercise.equipment}}</td>
                 <td>{{this_exercise.created_by}}</td>
+                <td><form action="/exercise/{{this_exercise.id}}/like" method="post"><input type=submit value="Like"></input></form><p>Total Likes:{{likes[0]['COUNT(*)']}}</p></td>
             </tr>
         </table>
+        <div class=container>
+            <h2>Comment on {{this_exercise.name}}:</h2>
+            <form class=container action="/createcomment/{{this_exercise.id}}" method="post">
+                <input type="hidden"name="exercise_id" value={{this_exercise.id}}>
+                <Label for="content">Comment:<input type="text" name="content" required></Label>
+                <input type="submit"class="btn btn-primary" value="Create User">
+            </form>
+        </div>
     </div>
         
         
