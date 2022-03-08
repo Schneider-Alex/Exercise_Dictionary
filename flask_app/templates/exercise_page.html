@@ -36,12 +36,12 @@
             </tr>
             
             <tr>
-                <td>{{this_exercise.name}}</td>
-                <td>{{this_exercise.description}}</td>
-                <td>{{this_exercise.primary_muscle}}</td>
-                <td>{{this_exercise.secondary_muscle}}</td>
-                <td>{{this_exercise.equipment}}</td>
-                <td>{{this_exercise.created_by}}</td>
+                <td>{{this_exercise_comments.name}}</td>
+                <td>{{this_exercise_comments.description}}</td>
+                <td>{{this_exercise_comments.primary_muscle}}</td>
+                <td>{{this_exercise_comments.secondary_muscle}}</td>
+                <td>{{this_exercise_comments.equipment}}</td>
+                <td>{{this_exercise_comments.created_by}}</td>
                 <td><form action="/exercise/{{this_exercise.id}}/like" method="post"><input type=submit value="Like"></input></form><p>Total Likes:{{likes[0]['COUNT(*)']}}</p></td>
             </tr>
         </table>
@@ -53,6 +53,9 @@
                 <input type="submit"class="btn btn-primary" value="Create User">
             </form>
         </div>
+        {%for comment in this_exercise_comments.comments%}
+        <p>"{{comment.content}}" - {{comment.written_by}}</p>
+        {%endfor%}
     </div>
         
         

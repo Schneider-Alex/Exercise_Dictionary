@@ -8,8 +8,8 @@ class Comment:
     def __init__( self , data ):
         self.id = data['id']
         self.content = data['content']
-        self.exercise_id = data['exercise_id']
-        self.user_id = data['user_id']
+        self.written_by = data['written_by']
+        self.written_for = data['written_for']
 
     @staticmethod
     def validate_comment( form ):

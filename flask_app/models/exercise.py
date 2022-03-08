@@ -3,7 +3,7 @@ from flask import flash, session
 import re
 from flask_app import app
 from flask_bcrypt import Bcrypt
-from flask_app.models import user
+from flask_app.models import user, comment
 bcrypt = Bcrypt(app)
 
 class Exercise:
@@ -45,15 +45,15 @@ class Exercise:
         
         return is_valid
         
-    @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM sightings;"
-        results = connectToMySQL('sasquatch').query_db(query)
-        sightings = []
-        if not len(results)<1:
-            for sighting in results:
-                sightings.append( cls(sighting)) 
-        return sightings
+    # @classmethod
+    # def get_all(cls):
+    #     query = "SELECT * FROM sightings;"
+    #     results = connectToMySQL('sasquatch').query_db(query)
+    #     sightings = []
+    #     if not len(results)<1:
+    #         for sighting in results:
+    #             sightings.append( cls(sighting)) 
+    #     return sightings
         
     @classmethod
     def get_one_exercise(cls, exerciseid):
@@ -65,15 +65,27 @@ class Exercise:
         results = connectToMySQL('exercise').query_db(query,data)
         return cls(results[0])
 
-        @classmethod
+    @classmethod
     def get_one_exercises_comments(cls, exerciseid):
         data={
             'id': exerciseid
         }
-        query = """SELECT * FROM exercises 
-        where id = %(id)s;"""
+        query = """SELECT * FROM exercises
+        LEFT JOIN comments ON exercises.id=comments.exercise_id
+        LEFT JOIN users ON users.id=comments.user_id
+        WHERE exercises.id= %(id)s"""
         results = connectToMySQL('exercise').query_db(query,data)
-        return cls(results[0])
+        Exercise=cls(results[0])
+        if results[0]["content"]:
+            for row_from_db in results:
+                comment_data ={
+                    "content" : row_from_db["content"],
+                    "id" : row_from_db["comments.id"],
+                    "written_by" : row_from_db["first_name"] + " " + row_from_db["last_name"],
+                    "written_for" : row_from_db["name"]
+                }
+                Exercise.comments.append(comment.Comment(comment_data))
+        return Exercise
 
 
     @classmethod
@@ -90,12 +102,16 @@ class Exercise:
 
 
     @classmethod
-    def delete_exercise(cls, sightingid):
+    def delete_exercise_and_comments_and_likes(cls, exerciseid):
         data = {
-            'id' : sightingid
+            'id' : exerciseid
         }
-        query="""DELETE FROM sightings WHERE id = %(id)s"""
-        return connectToMySQL('sasquatch').query_db( query, data )
+        query="""DELETE FROM likes WHERE exercise_id = %(id)s"""
+        connectToMySQL('exercise').query_db( query, data )
+        query="""DELETE FROM comments WHERE exercise_id = %(id)s"""
+        connectToMySQL('exercise').query_db( query, data )
+        query="""DELETE FROM exercises WHERE id = %(id)s"""
+        return connectToMySQL('exercise').query_db( query, data )
 
     @classmethod
     def create_exercise(cls,form):
@@ -124,24 +140,20 @@ class Exercise:
         return connectToMySQL('exercise').query_db( query, data )
 
     @classmethod
-    def update_sighting(cls,form):
+    def update_exercise(cls,form):
         data={
             'id' : form['id'],
-            'location': form['location'],
-            'what_happened':form['what_happened'],
-            'date':form['date'],
-            'number':form['number'],
-            'users_id':session['id']
+            'name': form['name'],
+            'description':form['description'],
+            'primary_muscle':form['primary_muscle'],
+            'secondary_muscle':form['secondary_muscle'],
+            'equipment':form['equipment']
         }
-        query = """UPDATE sightings
-        SET location = %(location)s, what_happened = %(what_happened)s, date = %(date)s, number = %(number)s, updated_at = NOW()
+        query = """UPDATE exercises
+        SET name = %(name)s, equipment = %(equipment)s, description = %(description)s, primary_muscle = %(primary_muscle)s, primary_muscle = %(secondary_muscle)s, updated_at = NOW()
         WHERE id=%(id)s;"""
-        return connectToMySQL('sasquatch').query_db( query, data )
+        return connectToMySQL('exercise').query_db( query, data )
 
-    @classmethod
-    def get_this_sighting(cls,data):
-        query = "SELECT * FROM sightings WHERE id = %(id)s"
-        return connectToMySQL('sasquatch').query_db(query,data)
 
 
 

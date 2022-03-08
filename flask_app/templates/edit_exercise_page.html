@@ -14,11 +14,9 @@
         <form class=container action="/logout" method="post">
             <input type="submit" class="btn btn-primary" value="Log-out">
         </form>
-        <form class=container action="/createsighting">
-            <input type="submit" class="btn btn-primary" value="Report New Sighting">
         </form>
         <form class=container action="/dashboard">
-            <input type="submit" class="btn btn-primary" value="Back to Sightings Page">
+            <input type="submit" class="btn btn-primary" value="Back to Main Groups Page">
         </form>
         
         </div>
@@ -31,14 +29,14 @@
             {% endif %}
         {% endwith %}
     <div class=main>
-        <form action="/editsighting"method='post'>
-            <input type="hidden" value="{{this_sighting.id}}" name ="id">
-            <Label for="location">Location: <input type="text"value="{{this_sighting.location}}" name="location" class="form-control" required></Label>
-            <Label for="what_happened">What Happened:<input type="text" value="{{this_sighting.what_happened}}" name="what_happened" class="form-control" required></Label>
-            <Label for="date">Date:<input type="date" name="date" value="{{this_sighting.date}}" class="form-control" required></Label>
-            <Label for="number"> Number of Sasquatches (Previously {{this_sighting.number}} Reported)</Label>:<input type="number" name="number" value="{{this_sighting.number}} class="form-control" required></Label>
-            
-            <input type="submit"class="btn btn-primary" value="Update Sighting">
+        <form action="/editexercise"method='post'>
+            <input type="hidden" value="{{this_exercise.id}}" name ="id">
+            <Label for="name">Name: <input type="text"value="{{this_exercise.name}}" name="name" class="form-control" required></Label>
+            <Label for="description">Description:<input type="text" value="{{this_exercise.description}}" name="description" class="form-control" required></Label>
+            <Label for="primary_muscle">Primary Muscle:<input type="text" value="{{this_exercise.primary_muscle}}" name="primary_muscle" class="form-control" required></Label>
+            <Label for="secondary_muscle">Secondary Muscle:<input type="text" value="{{this_exercise.secondary_muscle}}" name="secondary_muscle" class="form-control" required></Label>
+            <Label for="equipment">Equipment:<input type="text" value="{{this_exercise.equipment}}" name="equipment" class="form-control" required></Label>
+            <input type="submit"class="btn btn-primary" value="Update Exercise">
         </form>
     </div>
         

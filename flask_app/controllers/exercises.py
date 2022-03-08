@@ -36,26 +36,27 @@ def like_exercise(exerciseid):
     return redirect (f'/exercise/{exerciseid}')
 
 
-@app.route('/sighting/edit/<int:sightingid>')
-def edit_sighting_page(sightingid):
-    return render_template('edit_sighting_page.html',this_sighting=sighting.Sighting.get_one_sighting(sightingid))
+@app.route('/exercise/edit/<int:exerciseid>')
+def edit_sighting_page(exerciseid):
+    return render_template('edit_exercise_page.html',this_exercise=exercise.Exercise.get_one_exercise(exerciseid))
 
-@app.route('/editsighting',methods=['POST'])
+@app.route('/editexercise',methods=['POST'])
 def edit_sighting():
-    check=sighting.Sighting.validate_sighting(request.form)
-    sightingid=request.form['id']
+    check=exercise.Exercise.validate_exercise(request.form)
+    exerciseid=request.form['id']
     if check:
-        sighting.Sighting.update_sighting(request.form)
-        return redirect ('/dashboard')
-    return redirect(f'/sighting/edit/{sightingid}')
+        exercise.Exercise.update_exercise(request.form)
+        return redirect (f'/exercise/{exerciseid}')
+    return redirect(f'/exercise/edit/{exerciseid}')
 
 @app.route('/exercise/<int:exerciseid>')
 def display_class_detail(exerciseid):
-        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid),likes=exercise.Exercise.get_one_exercises_likes(exerciseid))
+        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid),likes=exercise.Exercise.get_one_exercises_likes(exerciseid),this_exercise_comments=exercise.Exercise.get_one_exercises_comments(exerciseid))
 
-@app.route('/sighting/delete/<int:sightingid>')
-def delete_sighting_link(sightingid):
-    sighting.Sighting.delete_sighting(sightingid)
-    return redirect('/dashboard')
+@app.route('/exercise/delete/<int:exerciseid>')
+def delete_exercise_link(exerciseid):
+    mainid=exercise.Exercise.get_one_exercise(exerciseid).main_group_id
+    exercise.Exercise.delete_exercise_and_comments_and_likes(exerciseid)
+    return redirect(f'/main/{mainid}')
 
 
