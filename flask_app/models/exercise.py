@@ -25,11 +25,24 @@ class Exercise:
     # ************MUST EDIT DIFFICULTY AFTER SUCCESFUL CREATION*******************************************
 
     @staticmethod
-    def validate_sighting(form):
+    def validate_exercise(form):
         is_valid = True
-        if int(form['number']) < 1:
-            flash("You can't report a sighting with no sasquatches! You were just outside!")
+        if len(form['name']) < 2:
+            flash("Exercise name must be greater than 2 characters")
             is_valid = False
+        if len(form['description']) < 25:
+            flash("Description must be atleast 25 characters")
+            is_valid = False
+        if len(form['primary_muscle']) < 3:
+            flash("Primary Muscle name must be atleast 3 characters")
+            is_valid = False
+        if len(form['secondary_muscle']) < 3:
+            flash("Secondary Muscle name must be atleast 3 characters")
+            is_valid = False
+        if len(form['equipment']) < 3:
+            flash("Equipment must be atleast 3 characters")
+            is_valid = False
+        
         return is_valid
         
     @classmethod
@@ -43,12 +56,12 @@ class Exercise:
         return sightings
         
     @classmethod
-    def get_one_sighting(cls, sightingid):
+    def get_one_exercise(cls, sightingid):
         data={
             'id': sightingid
         }
-        query = "SELECT * FROM sightings where id = %(id)s;"
-        results = connectToMySQL('sasquatch').query_db(query,data)
+        query = "SELECT * FROM exercises where id = %(id)s;"
+        results = connectToMySQL('exercise').query_db(query,data)
         return cls(results[0])
 
 
@@ -61,17 +74,20 @@ class Exercise:
         return connectToMySQL('sasquatch').query_db( query, data )
 
     @classmethod
-    def create_sighting(cls,form):
+    def create_exercise(cls,form):
+        
         data={
-            'location': form['location'],
-            'what_happened':form['what_happened'],
-            'date':form['date'],
-            'number':form['number'],
-            'users_id' : session['id'],
+            'name': form['name'],
+            'description':form['description'],
+            'primary_muscle':form['primary_muscle'],
+            'secondary_muscle':form['secondary_muscle'],
+            'equipment' : form['equipment'],
+            'main_group' : form['main_group'],
+            'user_id' : session['id'],
         }
-        query = """INSERT INTO sightings (location, what_happened, date, number,users_id) 
-        VALUES (%(location)s, %(what_happened)s, %(date)s, %(number)s,%(users_id)s);"""
-        return connectToMySQL('sasquatch').query_db( query, data )
+        query = """INSERT INTO exercises (name, description, primary_muscle, secondary_muscle,equipment,main_group_id,user_id) 
+        VALUES (%(name)s, %(description)s, %(primary_muscle)s, %(secondary_muscle)s,%(equipment)s,%(main_group)s,%(user_id)s);"""
+        return connectToMySQL('exercise').query_db( query, data )
     
     @classmethod
     def update_sighting(cls,form):

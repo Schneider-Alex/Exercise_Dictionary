@@ -57,4 +57,6 @@ class Group:
                     "user_id" : row_from_db["user_id"]
                 }
                 Group.exercises.append(exercise.Exercise(exercise_data))
+            if results[0]["exercises.id"]==None:
+                Group.exercises=False
         return Group

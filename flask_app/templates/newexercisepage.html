@@ -22,12 +22,14 @@
     <div class=main>
         
         <div class=container>
-            <form class=container action="/exercise/new" method="post">
-                <Label for="location">Exercise Name: <input type="text" name="location" class="form-control" required></Label>
-                <Label for="what_happened">What Happened: <input type="text" name="what_happened" class="form-control" required></Label>
-                <Label for="date">Date:<input type="date" name="date" class="form-control" required></Label>
-                <Label for="number"> Number of Sasquatches:</Label>:<input type="number" name="number" class="form-control" required></Label>
-                <input type="submit" value="Submit Report" class="btn btn-primary">
+            <form class=container action="/exercise/{{mainid}}/new" method="post">
+                <input type="hidden" name="main_group" value="{{mainid}}">
+                <Label for="name">Exercise Name: <input type="text" name="name" class="form-control" required></Label>
+                <Label for="description">Description: <input type="text" name="description" class="form-control" required></Label>
+                <Label for="primary_muscle">Primary Muscle: <input type="text" name="primary_muscle" class="form-control" required></Label>
+                <Label for="secondary_muscle">Seconary Muscle: <input type="text" name="secondary_muscle" class="form-control" default="NA" ></Label>
+                <Label for="equipment">Equipment: <input type="text" name="equipment" class="form-control" required></Label>
+                <input type="submit" value="Create Exercise" class="btn btn-primary">
             </form>
         </div>
     </div>

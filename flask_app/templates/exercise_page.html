@@ -15,11 +15,11 @@
         <form class=container action="/logout" method="post">
             <input type="submit" class="btn btn-primary" value="Log-out">
         </form>
-        <form class=container action="/createsighting">
-            <input type="submit" class="btn btn-primary" value="Report Sighting">
+        <form class=container action="/main/{{this_exercise.main_group_id}}">
+            <input type="submit" class="btn btn-primary" value="Back to Exercises">
         </form>
         <form class=container action="/dashboard">
-            <input type="submit"class="btn btn-primary" value="Back to Sightings Page">
+            <input type="submit"class="btn btn-primary" value="Back to Main Groups Page">
         </form>
         </div>
     </div>
@@ -27,18 +27,20 @@
         <table class="table table-striped">
             <tr>
                 <th>Location:</th>
-                <th>What Happened:</th>
-                <th>Date:</th>
-                <th>Number of Sasquatches:</th>
-                <th>Reported By:</th>
+                <th>Description:</th>
+                <th>Primary Muscle:</th>
+                <th>Secondary Muscle:</th>
+                <th>Equipment:</th>
+                <th>Created By:</th>
             </tr>
             
             <tr>
-                <td>{{this_sighting.location}}</td>
-                <td>{{this_sighting.what_happened}}</td>
-                <td>{{this_sighting.date}}</td>
-                <td>{{this_sighting.number}}</td>
-                <td>{{this_sighting.created_by}}</td>
+                <td>{{this_exercise.name}}</td>
+                <td>{{this_exercise.description}}</td>
+                <td>{{this_exercise.primary_muscle}}</td>
+                <td>{{this_exercise.secondary_muscle}}</td>
+                <td>{{this_exercise.equipment}}</td>
+                <td>{{this_exercise.created_by}}</td>
             </tr>
         </table>
     </div>
