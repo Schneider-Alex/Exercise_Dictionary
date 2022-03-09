@@ -8,10 +8,76 @@
     <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/mainpage.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body id=body>
-    <div class=container>
-        
-    <h1 class="header red">Enter Account Information Below</h1>
+<body class=landingbody>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <img src="{{url_for('static',filename='images/dumbelllogo.png')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="#">Exercise Bible</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+            </ul>
+        </div>
+        </div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Returning User:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class=formcontainer>
+                        <form class=container action="/login" method="post">
+                            <Label for="email">Email adress:</Label>
+                            <input type="text" name="email" required>
+                            <Label for="password">Password:</Label>
+                            <input type="password" name="password" required>
+                            <input type="submit" class="btn btn-primary" value="Log-In">
+                        </form>
+                    </div>
+                </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                New User:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class=formcontainer>
+                    <form class=container action="/createuser" method="post">
+                        <Label for="first_name">First Name:<input type="text" name="first_name" required></Label>
+                        <Label for="last_name">Last Name:<input type="text" name="last_name" required></Label>
+                        <Label for="email">Email adress:<input type="text" name="email" required></Label>
+                        <Label for="password">Password:<input type="password" name="password" required></Label>
+                        <Label for="passwordcheck">Confirm Password:<input type="password" name="passwordcheck" required></Label>
+                        <input type="submit"class="btn btn-primary" value="Create User">
+                    </form>
+                    </div>  
+                </ul>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Read me!:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class=formcontainer>
+                        <strong>Welcome to Exercise Bible!</strong> 
+                        Here you can learn about new exercises, comment on them, like them (if you like them that is!) and even create  exercises of your own to add to our collection! Get started by <code>registering or logging in above!</code> We can't wait to hear what you think!
+                    </div>  
+                </ul>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {%if session%}
+            <form class=container action="/logout" method="post">
+                <input type="submit" class="btn btn-primary" value="Log-out">
+            </form>
+            {%endif%}
+        </div>
+    </nav>
     {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
                     {% if messages %}                            <!-- check if there are any messages -->
                         {% for message in messages %}            <!-- loop through the messages -->
@@ -19,37 +85,9 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-    </div>
-    <div class=main>
-        
-        <div class=container>
-            <h2>Create User Account:</h2>
-            <form class=container action="/createuser" method="post">
-                <Label for="first_name">First Name:<input type="text" name="first_name" required></Label>
-                <Label for="last_name">Last Name:<input type="text" name="last_name" required></Label>
-                <Label for="email">Email adress:<input type="text" name="email" required></Label>
-                <Label for="password">Password:<input type="password" name="password" required></Label>
-                <Label for="passwordcheck">Confirm Password:<input type="password" name="passwordcheck" required></Label>
-                <input type="submit"class="btn btn-primary" value="Create User">
-            </form>
-        </div>
-        <div class=container>
-            <h2>Log In:</h2>
-            <form class=container action="/login" method="post">
-                <Label for="email">Email adress:</Label>
-                <input type="text" name="email" required>
-                <Label for="password">Password:</Label>
-                <input type="password" name="password" required>
-                <input type="submit" class="btn btn-primary" value="Log-In">
-            </form>
-        </div>
-    </div>
-        {%if session%}
-        <form class=container action="/logout" method="post">
-            <input type="submit" class="btn btn-primary" value="Log-out">
-        </form>
-        {%endif%}
         
         
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

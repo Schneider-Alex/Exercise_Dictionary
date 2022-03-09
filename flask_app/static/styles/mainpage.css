@@ -1,26 +1,68 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.navbar{
+    background-color: darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    width: 75%;
+    height: fit-content;
+    padding: 50px;
+    border-radius: 5px
+}
+
+.navtitle{
+    flex:3
+}
+.navlinks{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex:1
+}
+
+.col {
+    background: #333;
+    margin: 50px auto;
+    width: 40%;
+    height: fit-content;
+    padding: 50px;
+    border-radius: 5px;
+    text-decoration-color: honeydew;
+    }
+
 .container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.main{
-    display:flex;
-    justify-content: space-around;
-    align-items:center;
+
+.formcontainer{
+    background: linear-gradient(110deg, #d9d9d9 60%, #aaa8a7 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 .hcontainer{
     display:flex;
     justify-content: space-around;
     align-items:center;
 }
 
-.red{
-    color:red;
-}
-
-#body{
-    background: url("../images/Background.jpeg") no-repeat;
+.landingbody{
+    
+    background: url("../images/Background.jpeg")no-repeat center ; 
     background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     /* background: radial-gradient(circle, black, white); */
 }
