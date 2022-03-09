@@ -15,3 +15,12 @@
     align-items:center;
 }
 
+.red{
+    color:red;
+}
+
+#body{
+    background: url("../images/Background.jpeg") no-repeat;
+    background-position: center;
+    /* background: radial-gradient(circle, black, white); */
+}
