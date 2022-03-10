@@ -5,26 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='mainpage.css')}}">
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/mainpage.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
-    <div class=main>
-        <h1>Hello {{session['first_name']}}!</h1>
-        <div class="hcontainer">
-        <form class=container action="/logout" method="post">
-            <input type="submit" class="btn btn-primary" value="Log-out">
-        </form>
-        <form class=container action="/createexercise/{{groups_exercises.id}}">
-            <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
-        </form>
-        <form class=container action="/dashboard">
-            <input type="submit"class="btn btn-primary" value="Back to Main Muscles Page">
-        </form>
-        </div>
-    </div>
-    <div class=container>
-        {%if groups_exercises.exercises%}
+<body class=landingbody>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <img src="{{url_for('static',filename='images/dumbelllogo.png')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                <a class="navbar-brand" href="#">Exercise Bible</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li>
+                        <form class=container action="/createexercise/{{groups_exercises.id}}">
+                            <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
+                        </form>
+                    </li>
+                    <li>
+                        <form class=container action="/dashboard">
+                            <input type="submit"class="btn btn-primary" value="Back to Main Muscles Page">
+                        </form>
+                    </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <p>Welcome {{session['first_name']}}!</p>
+                    </div>
+                    
+                    <li>{%if session%}
+                        <form class=container action="/logout" method="post">
+                            <input type="submit" class="btn btn-primary" value="Log-out">
+                        </form>
+                        {%endif%}</li>
+                    </ul>
+                    </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    
+        <ol class="list-group">
+            {%if groups_exercises.exercises%}
+            {%for exercise in groups_exercises.exercises%}
+                
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{exercise.name}} - Created By: {{exercise.created_by}}</div>
+                        <a href="/exercise/{{exercise.id}}">View Details</a>
+                        {%if exercise.user_id == session['id']%}
+                        <a href="/exercise/edit/{{exercise.id}}">Edit</a>
+                        <a href="/exercise/delete/{{exercise.id}}">Delete</a>
+                        {%endif%}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">like count</span>
+                    </li>
+            {%endfor%}
+            {%else%}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <H2>Be the first to create a {{groups_exercises.name}} exercise!</H2>
+                <form class=container action="/createexercise/{{groups_exercises.id}}">
+                    <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
+                </form>
+            </li>
+            {%endif%}
+        </ol>
+
+
+        <!-- {%if groups_exercises.exercises%}
         <table class="table table-striped">
             <tr>
                 <th>Exercise Name:</th>
@@ -50,7 +105,7 @@
             <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
         </form>
         {%endif%}
-    </div>
+    </div> -->
         
         
 </body>

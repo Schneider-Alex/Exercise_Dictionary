@@ -35,6 +35,11 @@ def like_exercise(exerciseid):
     exercise.Exercise.like_exercise(exerciseid)
     return redirect (f'/exercise/{exerciseid}')
 
+@app.route("/exercise/<int:exerciseid>/unlike",methods=['POST'])
+def unlike_exercise(exerciseid):
+    exercise.Exercise.unlike_exercise(exerciseid)
+    return redirect (f'/exercise/{exerciseid}')
+
 
 @app.route('/exercise/edit/<int:exerciseid>')
 def edit_sighting_page(exerciseid):
@@ -51,7 +56,7 @@ def edit_sighting():
 
 @app.route('/exercise/<int:exerciseid>')
 def display_class_detail(exerciseid):
-        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid),likes=exercise.Exercise.get_one_exercises_likes(exerciseid),this_exercise_comments=exercise.Exercise.get_one_exercises_comments(exerciseid))
+        return render_template('exercise_page.html', this_exercise=exercise.Exercise.get_one_exercise(exerciseid),user_like=exercise.Exercise.get_one_exercises_likes(exerciseid),likes=exercise.Exercise.count_one_exercises_likes(exerciseid),this_exercise_comments=exercise.Exercise.get_one_exercises_comments(exerciseid))
 
 @app.route('/exercise/delete/<int:exerciseid>')
 def delete_exercise_link(exerciseid):

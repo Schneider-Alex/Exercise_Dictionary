@@ -22,23 +22,21 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <p>Welcome {{session['first_name']}}!</p>
-                    </div>
+                        <li>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <p>Welcome {{session['first_name']}}!</p>
+                                
+                            </div>
+                        </li>
+                        <li>
+                            {%if session%}
+                                <form class=container action="/logout" method="post">
+                                    <input type="submit" class="btn btn-primary" value="Log-out">
+                                </form>
+                                {%endif%}
+                        </li>
                     </ul>
                     </div>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        {%if session%}
-                        <form class=container action="/logout" method="post">
-                            <input type="submit" class="btn btn-primary" value="Log-out">
-                        </form>
-                        {%endif%}
-                    </div>
-                </ul>
-            </div>
         </nav>
         <ol class="list-group">
             {%for group in groups%}

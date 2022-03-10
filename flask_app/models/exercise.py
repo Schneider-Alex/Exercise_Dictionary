@@ -89,7 +89,7 @@ class Exercise:
 
 
     @classmethod
-    def get_one_exercises_likes(cls, exerciseid):
+    def count_one_exercises_likes(cls, exerciseid):
         data={
             'id': exerciseid
         }
@@ -99,6 +99,18 @@ class Exercise:
         if not results:
             return 0
         return results
+    
+    @classmethod
+    def get_one_exercises_likes(cls, exerciseid):
+        data={
+            'exercise_id': exerciseid,
+            'user_id' : session['id']
+        }
+        query = """SELECT * FROM likes 
+        where user_id = %(user_id)s and exercise_id =%(exercise_id)s;"""
+        results = connectToMySQL('exercise').query_db(query,data)
+        return results
+
 
 
     @classmethod
@@ -137,6 +149,16 @@ class Exercise:
         }
         query = """INSERT INTO likes (user_id, exercise_id) 
         VALUES (%(user_id)s,%(exercise_id)s);"""
+        return connectToMySQL('exercise').query_db( query, data )
+
+    @classmethod
+    def unlike_exercise(cls,exerciseid):
+        data={
+            'user_id' : session['id'],
+            'exercise_id' : exerciseid
+        }
+        query = """DELETE FROM likes 
+        WHERE user_id = %(user_id)s and  exercise_id = %(exercise_id)s;"""
         return connectToMySQL('exercise').query_db( query, data )
 
     @classmethod

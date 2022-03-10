@@ -26,11 +26,11 @@
 }
 
 .col {
-    background: #333;
-    margin: 50px auto;
+    background: rgb(236, 235, 235);
+    margin:1% auto;
     width: 40%;
     height: fit-content;
-    padding: 50px;
+    padding: 1%;
     border-radius: 5px;
     text-decoration-color: honeydew;
     }
@@ -65,4 +65,12 @@
     -o-background-size: cover;
     background-size: cover;
     /* background: radial-gradient(circle, black, white); */
+}
+
+.tablebackgroundwhite{
+    background-color: whitesmoke;
+}
+
+.thinpad{
+    padding: 1% 5%;
 }
