@@ -23,11 +23,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li>
-                        <form class=container action="/createexercise/{{groups_exercises.id}}">
-                            <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
-                        </form>
-                    </li>
-                    <li>
                         <form class=container action="/dashboard">
                             <input type="submit"class="btn btn-primary" value="Back to Main Muscles Page">
                         </form>
@@ -51,7 +46,7 @@
                 </ul>
             </div>
         </nav>
-    
+        <div class=col>
         <ol class="list-group">
             {%if groups_exercises.exercises%}
             {%for exercise in groups_exercises.exercises%}
@@ -65,18 +60,20 @@
                         <a href="/exercise/delete/{{exercise.id}}">Delete</a>
                         {%endif%}
                     </div>
-                    <span class="badge bg-primary rounded-pill">like count</span>
+                    <!-- <span class="badge bg-primary rounded-pill">like count</span> -->
                     </li>
             {%endfor%}
             {%else%}
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <H2>Be the first to create a {{groups_exercises.name}} exercise!</H2>
+            {%endif%}
+            <li>
                 <form class=container action="/createexercise/{{groups_exercises.id}}">
                     <input type="submit" class="btn btn-primary" value="Create {{groups_exercises.name}} Exercise">
                 </form>
             </li>
-            {%endif%}
         </ol>
+        </div>
 
 
         <!-- {%if groups_exercises.exercises%}

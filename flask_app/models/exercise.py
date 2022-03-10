@@ -87,7 +87,6 @@ class Exercise:
                 Exercise.comments.append(comment.Comment(comment_data))
         return Exercise
 
-
     @classmethod
     def count_one_exercises_likes(cls, exerciseid):
         data={
@@ -110,8 +109,6 @@ class Exercise:
         where user_id = %(user_id)s and exercise_id =%(exercise_id)s;"""
         results = connectToMySQL('exercise').query_db(query,data)
         return results
-
-
 
     @classmethod
     def delete_exercise_and_comments_and_likes(cls, exerciseid):
