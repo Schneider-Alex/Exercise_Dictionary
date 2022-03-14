@@ -24,7 +24,7 @@ class Comment:
         data={
             'content': form['content'],
             'exercise_id':form['exercise_id'],
-            'user_id':session['id'],
+            'user_id': session['id'],
         }
         query = """INSERT INTO comments (content, exercise_id, user_id) 
         VALUES (%(content)s, %(exercise_id)s, %(user_id)s);"""

@@ -32,8 +32,8 @@ var myForm = document.getElementById('commentSubmit');
         var form = new FormData(myForm);
         console.log(form.get('content'))
         // this how we set up a post request and send the form data.
-        fetch(`http://127.0.0.1:5000/createcomment/`, { method :'POST', body : form})
-            .then( response => response.json() )
+        fetch(`http://127.0.0.1:5000/createcomment`, { method :'POST', body : form})
+            .then( response => response.text() )
             .then( data => console.log(data) )
         var comments = document.getElementById('comments');
         let row = document.createElement('li');
@@ -43,8 +43,6 @@ var myForm = document.getElementById('commentSubmit');
             comments.appendChild(row);
         document.getElementById('commentContent').value=""
                 
-
-
     }
 
 

@@ -86,7 +86,7 @@
             </div>
             <div>
             
-            <form class=container action="/createcomment/{{this_exercise.id}}" method="post" id="commentSubmit">
+            <form class=container action="/createcomment" method="post" id="commentSubmit">
                 <input type="hidden"name="exercise_id" value={{this_exercise.id}}>
                 <Label for="content"><input type="submit"class="btn btn-primary" value="Comment:"><input type="text" name="content" required id="commentContent"></Label>
                 
