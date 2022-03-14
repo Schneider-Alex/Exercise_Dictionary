@@ -13,3 +13,13 @@ def create_exercise_comment(exerciseid):
     else:
         flash('must be logged in to create comment!')
         return redirect('/')
+
+@app.route('/createcomment',methods=['POST'])
+def create_exercise_comment_ajax(exerciseid):
+    if comment.Comment.validate_comment(request.form):
+        console.log('hello')
+        comment.Comment.create_comment(request.form)
+        return True
+    else:
+        flash('must be logged in to create comment!')
+        return False
