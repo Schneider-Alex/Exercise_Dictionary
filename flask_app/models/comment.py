@@ -29,3 +29,24 @@ class Comment:
         query = """INSERT INTO comments (content, exercise_id, user_id) 
         VALUES (%(content)s, %(exercise_id)s, %(user_id)s);"""
         return connectToMySQL('exercise').query_db( query, data )
+
+
+    @classmethod
+    def get_one_comments_author(cls,commentid):
+        data={
+            'id': commentid
+        }
+        query = """SELECT * FROM comments
+        JOIN users ON comments.user_id = users.id 
+        JOIN exercises ON comments.exercise_id = exercises.id
+        where comments.id = %(id)s;"""
+        row_from_db = connectToMySQL('exercise').query_db(query,data)
+        print(row_from_db[0])
+        comment_data ={
+                    "content" : row_from_db[0]["content"],
+                    "id" : row_from_db[0]["id"],
+                    "written_by" : row_from_db[0]["first_name"] + " " + row_from_db[0]["last_name"],
+                    "written_for" : row_from_db[0]["name"]
+                }
+        return cls(comment_data)
+

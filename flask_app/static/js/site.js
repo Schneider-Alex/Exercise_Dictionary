@@ -30,18 +30,22 @@ var myForm = document.getElementById('commentSubmit');
     myForm.onsubmit = function(e){
         e.preventDefault();
         var form = new FormData(myForm);
-        console.log(form.get('content'))
         // this how we set up a post request and send the form data.
         fetch(`http://127.0.0.1:5000/createcomment`, { method :'POST', body : form})
-            .then( response => response.text() )
-            .then( data => console.log(data) )
-        var comments = document.getElementById('comments');
-        let row = document.createElement('li');
-            let content = document.createElement('p');
-            content.innerHTML = form.get('content');
-            row.appendChild(content);
-            comments.appendChild(row);
-        document.getElementById('commentContent').value=""
+            .then( response => response.json() )
+            .then( data => {
+                console.log(data)
+                console.log(data.content)
+                var comments = document.getElementById('comments');
+                let row = document.createElement('li');
+                let content = document.createElement('p');
+                content.innerHTML = form.get('content');
+                content.innerHTML = data['content'] +' - '+ data['written_by'];
+                row.appendChild(content);
+                comments.appendChild(row);
+                document.getElementById('commentContent').value=""
+            } )
+        
                 
     }
 
