@@ -30,7 +30,6 @@ class Comment:
         VALUES (%(content)s, %(exercise_id)s, %(user_id)s);"""
         return connectToMySQL('exercise').query_db( query, data )
 
-
     @classmethod
     def get_one_comments_author(cls,commentid):
         data={

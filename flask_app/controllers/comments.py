@@ -2,8 +2,6 @@ from flask_app import app
 from flask import render_template,redirect,request,session,flash, jsonify
 from flask_app.models import user, exercise, main_group,comment
 
-
-
 @app.route('/createcomment/<int:exerciseid>',methods=['POST'])
 def create_exercise_comment(exerciseid):
     if session:

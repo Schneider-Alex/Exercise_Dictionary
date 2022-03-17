@@ -19,10 +19,8 @@ class Exercise:
         self.main_group_id=data['main_group_id']
         self.user_id  = data['user_id']
         self.created_by= user.User.get_one_users_name(self.user_id)
-        self.difficulty = []
         self.likes=[]
         self.comments=[]
-    # ************MUST EDIT DIFFICULTY AFTER SUCCESFUL CREATION*******************************************
 
     @staticmethod
     def validate_exercise(form):
@@ -42,18 +40,7 @@ class Exercise:
         if len(form['equipment']) < 3:
             flash("Equipment must be atleast 3 characters")
             is_valid = False
-        
         return is_valid
-        
-    # @classmethod
-    # def get_all(cls):
-    #     query = "SELECT * FROM sightings;"
-    #     results = connectToMySQL('sasquatch').query_db(query)
-    #     sightings = []
-    #     if not len(results)<1:
-    #         for sighting in results:
-    #             sightings.append( cls(sighting)) 
-    #     return sightings
         
     @classmethod
     def get_one_exercise(cls, exerciseid):

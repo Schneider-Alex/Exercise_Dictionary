@@ -3,7 +3,6 @@ from flask import render_template,redirect,request,session,flash
 from flask_app.models import user, exercise
 from flask import flash
 
-
 @app.route('/createexercise/<int:mainid>')
 def trasnfer_to_create_exercise_page(mainid):
     if session:
@@ -11,15 +10,6 @@ def trasnfer_to_create_exercise_page(mainid):
     else:
         flash('must be logged in to view this page!')
         return redirect('/')
-
-# @app.route('/saveexercise/<int:mainid>')
-# def trasnfer_to_create_exercise_page(mainid):
-#     if session:
-#         return render_template('newexercisepage.html',mainid=mainid)
-#     else:
-#         flash('must be logged in to view this page!')
-#         return redirect('/')
-
 
 @app.route('/exercise/<int:mainid>/new',methods=['POST'])
 def new_exercise(mainid):
@@ -42,11 +32,11 @@ def unlike_exercise(exerciseid):
 
 
 @app.route('/exercise/edit/<int:exerciseid>')
-def edit_sighting_page(exerciseid):
+def edit_exercise_page(exerciseid):
     return render_template('edit_exercise_page.html',this_exercise=exercise.Exercise.get_one_exercise(exerciseid))
 
 @app.route('/editexercise',methods=['POST'])
-def edit_sighting():
+def edit_exercise():
     check=exercise.Exercise.validate_exercise(request.form)
     exerciseid=request.form['id']
     if check:
