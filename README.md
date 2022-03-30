@@ -9,3 +9,5 @@ The following SQL command MUST be run in order to initiate some functions from t
 
 "INSERT INTO main_groups (name) values ('Chest'),('Back'),('Arms'),('Legs');"
 
+going to try to Auto run this command on set up
+
